@@ -13,6 +13,6 @@ module.exports = {
     },
     development: {
         dialect: "sqlite",
-        storage: "../../smartcard.sqlite"
+        storage: "smartcard.sqlite"
     },
 }

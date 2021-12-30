@@ -4,6 +4,9 @@ import { getHospitalDetail, loginHospital, registerHospital } from './auth.contr
 const authRouter = express.Router();
 
 
-authRouter.post('/', registerHospital)
+authRouter.post('/register', registerHospital)
 authRouter.post('/', loginHospital)
 authRouter.post('/', getHospitalDetail)
+
+
+export default authRouter;
