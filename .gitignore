@@ -3,3 +3,4 @@ dist/
 .env
 
 smartcard.sqlite
+:memory

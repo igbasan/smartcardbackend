@@ -6,7 +6,7 @@ const authRouter = express.Router();
 
 authRouter.post('/register', registerHospital)
 authRouter.post('/', loginHospital)
-authRouter.post('/', getHospitalDetail)
+authRouter.get('/:regNo', getHospitalDetail)
 
 
 export default authRouter;

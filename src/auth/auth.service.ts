@@ -9,5 +9,14 @@ export const registerAHospital = async (data: hospital) => {
         console.log(error);
         throw new Error('There was an error registering hospital')
     }
+}
 
+export const getAHospital = async(regNo: string) => {
+    try {
+        const details = await db.hospital.findOne({ where: {hospital_reg:regNo } })
+        return details
+    } catch (error) {
+        console.log(error);
+        throw new Error('Unable to fetch hospital')
+    }
 }
