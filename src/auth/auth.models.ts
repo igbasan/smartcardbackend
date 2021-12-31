@@ -4,7 +4,7 @@ export interface hospital {
     domain: string;
     email: string;
     phoneNumber: string;
-    hospital_reg: string;
+    password: string;
 }
 
 
@@ -17,5 +17,11 @@ export const hospitalRegRule = {
     domain: "url",
     email: "required|email",
     phoneNumber: "string",
-    hospital_reg: "string"
+    password: "string|max:8|min:5"
+}
+
+// hospital login rul
+export const hospitalLoginRule = {
+    email: "required|email",
+    password: "string|max:8|min:5",
 }

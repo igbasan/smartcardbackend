@@ -12,6 +12,6 @@ export const checkValidity = (data, rule) => {
         return err
     } else {
         // return empty array if no error
-        return []
+        return ''
     }
 }

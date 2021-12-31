@@ -1,6 +1,8 @@
 import db from '../database/models';
 import { hospital } from './auth.models';
 
+require('dotenv').config();
+
 export const registerAHospital = async (data: hospital) => {
     try {
         const newHospital = await db.hospital.create(data);
