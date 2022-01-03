@@ -5,7 +5,7 @@ export const hospitalRegRule = {
     address: "string|required",
     domain: "url",
     email: "required|email",
-    phoneNumber: "string",
+    phoneNumber: "string|required|min:11",
     password: "string|max:8|min:5"
 }
 
