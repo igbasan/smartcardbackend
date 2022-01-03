@@ -21,6 +21,11 @@ The development server uses sqlite for simplicity while
 the production uses postgres.
 ensure to request for the environmental variables
 
+## MIGRATION
+Before starting the server, ensure to run the database migration
+``` npm run update-db```
+This creates the database connection and all tables
+
 #### -- Note
 remember to install tsc-node globally is server fails to start
 For test driven approach, lets ensure to seperate concerns
@@ -28,9 +33,10 @@ For test driven approach, lets ensure to seperate concerns
 | -- controller.ts
 | -- route.ts
 | -- authservice.ts
-| -- model.ts
+| -- interface.ts
 | -- test.ts
 
+## Project strcuture
 The project structure is given below
 ```
 project
@@ -46,3 +52,8 @@ project
 │       │___config
 │       │___migrations
 │       │___models
+
+
+
+
+

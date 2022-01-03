@@ -1,8 +1,9 @@
 import { Request, Response } from 'express';
-import { getAHospital, registerAHospital } from './auth.service';
-import { hospital, hospitalRegRule } from './auth.models';
+import { getAHospital, registerAHospital } from '../services/auth.service';
+import { hospital } from '../interface/auth.interface';
 import { checkValidity } from '../helper';
-import { hashPassword } from './auth.helper';
+import { hashPassword } from '../helpers/auth.helper';
+import { hospitalRegRule } from '../interface/validators';
 
 export const registerHospital = async (req: Request, res: Response) => {
     let data: hospital = req.body

@@ -1,5 +1,5 @@
 import db from '../database/models';
-import { hospital } from './auth.models';
+import { hospital } from '../interface/auth.interface';
 
 require('dotenv').config();
 

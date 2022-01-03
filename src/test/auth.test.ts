@@ -1,7 +1,7 @@
 import { assert } from 'chai';  // Using Assert style
 import { expect } from 'chai';  // Using Expect style
 import { should } from 'chai';  // Using Should style
-import { getAHospital, registerAHospital } from '../auth/auth.service';
+import { getAHospital, registerAHospital } from '../services/auth.service';
 import db from '../database/models';
 
 
