@@ -14,15 +14,31 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   hospital.init({
-    name: DataTypes.STRING,
+    name: {
+      type:DataTypes.STRING,
+      allowNull: false
+    },
     address: DataTypes.TEXT,
-    domain: DataTypes.STRING,
-    email: DataTypes.STRING,
-    phoneNumber: DataTypes.STRING,
+    domain: {
+      type: DataTypes.STRING,
+    },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        isEmail: true,
+      }
+    },
+    phoneNumber: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
     hospital_reg: {
       type: DataTypes.STRING,
     },
-    password: DataTypes.STRING
+    password: {
+      type: DataTypes.STRING,
+    }
   }, {
     sequelize,
     modelName: 'hospital',

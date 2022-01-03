@@ -17,7 +17,7 @@ describe('Hospital:', () => {
         domain: 'www.test.com',
         email: 'test@gmail.com',
         phoneNumber: '08056965067',
-        hospital_reg: '53627737'
+        password: '5362'
     }
 
     it('should register a hospital', async () => {
