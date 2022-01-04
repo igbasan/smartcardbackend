@@ -20,7 +20,7 @@ export const registerAHospital = async (data: hospitalIn) => {
         throw new Error("An hospital with email or phonenumber already exists");
     }
     try {
-        const newHospital = await db.hospital.create(data);
+        const newHospital = await db.hospital.create({...data, hospital_reg: 111});
         let result = newHospital.get({ plain: true }); // convert to js object
         delete result.password
         return result;
