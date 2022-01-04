@@ -52,7 +52,7 @@ export const loginHospital = async (req: Request, res: Response) => {
         }
         
         // generate token for user
-        const userToken: string = await generateToken({userId:foundHospital.id, email: foundHospital.email})
+        const userToken: string = await generateToken({hospitalId:foundHospital.id, email: foundHospital.email})
 
         return res.status(200).json({ success: true, data: foundHospital, token:userToken }) 
     } catch (error: any) {
@@ -62,6 +62,9 @@ export const loginHospital = async (req: Request, res: Response) => {
 
 export const getHospitalDetail = async (req: Request, res: Response) => {
     try {
+        if(!req.params.regNo) {
+            return res.status(400).json({ success: false, message:'registration number is required' })
+        }
         let result:hospitalOut | {} = await getAHospital(req.params.regNo)
         result === null ? result = {} : result;
         return res.status(200).json({ success: true, data: result })
