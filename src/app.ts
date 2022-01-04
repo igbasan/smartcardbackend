@@ -7,7 +7,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // other app config stays here
-app.use('/hospital',authRouter)
+app.use('/hospital',authRouter);
+
 
 
 export default app;

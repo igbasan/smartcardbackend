@@ -8,7 +8,7 @@ export const generateToken = async(payload: any) => {
 
 export const hashPassword = async(pwd:string) => {
     const hashed = await bcrypt.hash(pwd, 10);
-    console.log(hashed)
+  //  console.log(hashed)
     return hashed;
 }
 
