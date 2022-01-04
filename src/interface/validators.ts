@@ -10,7 +10,7 @@ export const hospitalRegRule = {
 }
 
 // hospital login rul
-export const hospitalLoginRule = {
+export const hospitalLogInRule = {
     email: "required|email",
     password: "string|max:8|min:5",
 }

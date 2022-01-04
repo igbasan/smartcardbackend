@@ -1,12 +1,13 @@
 import { Request, Response } from 'express';
-import { getAHospital, registerAHospital } from '../services/auth.service';
-import { hospital, hospitalOut } from '../interface/auth.interface';
+import { registerAHospital } from '../services/auth.service';
+import { hospitalIn, hospitalLogIn, hospitalOut } from '../interface/auth.interface';
 import { checkValidity } from '../helper';
-import { hashPassword } from '../helpers/auth.helper';
-import { hospitalRegRule } from '../interface/validators';
+import { generateToken, hashPassword, verifyPassword } from '../helpers/auth.helper';
+import { hospitalLogInRule, hospitalRegRule } from '../interface/validators';
+import { getAHospitalByEmail, getAHospital } from '../services/hospital.service';
 
 export const registerHospital = async (req: Request, res: Response) => {
-    let data: hospital = req.body
+    let data: hospitalIn = req.body
 
     try {
         const error = checkValidity(data, hospitalRegRule);
@@ -29,11 +30,35 @@ export const registerHospital = async (req: Request, res: Response) => {
 }
 export const loginHospital = async (req: Request, res: Response) => {
     try {
+        let data: hospitalLogIn = req.body;
+        const error = checkValidity(data, hospitalLogInRule)
+        if (error) {
+            return res.status(400).json({
+                success: false, message: error
+            })
+        }
 
-    } catch (error) {
+        let foundHospital = await getAHospitalByEmail(data.email);
+        if (!foundHospital) {
+            return res.status(403).json({success:false, message:'email or password not valid'})
+        }
 
+        // check that password is correct
+        
+        const pwdIsCorrect = await verifyPassword(data.password, foundHospital.password)
+        if(!pwdIsCorrect) {
+            return res.status(403).json({success:false, message:'email or password not valid'})
+        }
+        
+        // generate token for user
+        const userToken: string = await generateToken({userId:foundHospital.id, email: foundHospital.email})
+
+        return res.status(200).json({ success: true, data: foundHospital, token:userToken }) 
+    } catch (error: any) {
+        return res.status(412).json({ success: false, message: error.message })
     }
 }
+
 export const getHospitalDetail = async (req: Request, res: Response) => {
     try {
         let result:hospitalOut | {} = await getAHospital(req.params.regNo)

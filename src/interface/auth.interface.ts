@@ -12,6 +12,7 @@ export interface hospital {
 
 export type hospitalIn = Omit<hospital, "id" | "hospital_reg">
 export type hospitalOut = Omit<hospital, "password">
+export type hospitalLogIn = Pick<hospital, "email" | "password">
 
 
 
