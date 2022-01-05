@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import { NextFunction } from 'express';
 import { Request, Response } from 'express';
+import { userInfoInRequest } from '../types/express';
 
 export const generateToken = async(payload: any) => {
     const token = jwt.sign(payload, process.env.SECRET_KEY, { expiresIn: '10h' });
@@ -24,7 +25,7 @@ export const verifyPassword = async(pwd: string, dbpwd:string) => {
     return false;
 }
 
-export const verifyToken = (req: Request, res: Response, next: NextFunction) => {
+export const verifyToken = (req: userInfoInRequest, res: Response, next: NextFunction) => {
     // if no bearer token is set
     if (!req.headers.authorization) {
       return res.status(401).json({ success: false, "message": "Unauthorized request" })
@@ -43,6 +44,7 @@ export const verifyToken = (req: Request, res: Response, next: NextFunction) => 
       if (!decoded.hospitalId) {
         return res.status(401).json({ success: false, message: "token error" })
       }
+      req.hospitalId = decoded.hospitalId;
       next()
     })
   }

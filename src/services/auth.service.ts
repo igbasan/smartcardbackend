@@ -20,11 +20,24 @@ export const registerAHospital = async (data: hospitalIn) => {
         throw new Error("An hospital with email or phonenumber already exists");
     }
     try {
-        const newHospital = await db.hospital.create({...data, hospital_reg: 111});
+        const newHospital = await db.hospital.create(data);
         let result = newHospital.get({ plain: true }); // convert to js object
         delete result.password
         return result;
     } catch (error) {
         throw new Error('There was an error registering hospital')
+    }
+}
+
+export const updateHospitalProfile = async(hospitalId: number | undefined, data:hospitalIn) => {
+    try {
+        await db.hospital.update(data, {
+            where: {
+                id: hospitalId
+            }
+        })
+        return true;
+    } catch (error) {
+        throw new Error('Unable to update profile, contact admin!')
     }
 }

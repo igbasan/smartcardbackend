@@ -1,11 +1,11 @@
 import db from '../database/models';
 
 
-export const getAHospital = async (regNo: string) => {
+export const getAHospital = async (hospitalId: number | undefined) => {
     try {
         const details = await db.hospital.findOne({ 
             where: { 
-                hospital_reg: regNo 
+                id: hospitalId 
             },
             attributes: {
                 exclude: ['password']
