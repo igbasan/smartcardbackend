@@ -29,15 +29,3 @@ export const registerAHospital = async (data: hospitalIn) => {
     }
 }
 
-export const updateHospitalProfile = async(hospitalId: number | undefined, data:hospitalIn) => {
-    try {
-        await db.hospital.update(data, {
-            where: {
-                id: hospitalId
-            }
-        })
-        return true;
-    } catch (error) {
-        throw new Error('Unable to update profile, contact admin!')
-    }
-}

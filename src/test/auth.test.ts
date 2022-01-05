@@ -3,7 +3,8 @@ import { expect } from 'chai';  // Using Expect style
 import { should } from 'chai';  // Using Should style
 import { registerAHospital } from '../services/auth.service';
 import db from '../database/models';
-import { getAHospital, getAHospitalByEmail } from '../services/hospital.service';
+import { getAHospital, getAHospitalByEmail, updateHospitalProfile } from '../services/hospital.service';
+import { hospitalUpdate } from '../interface/auth.interface';
 
 
 before(async () => {
@@ -11,17 +12,18 @@ before(async () => {
     await db.sequelize.truncate({ cascade: true })
 })
 
-describe('Register Hospital:', () => {
+describe('Hospital:', () => {
     let result;
-    beforeEach(async() => {
-        const data = {
-            name: 'test hospital',
-            address: 'test addr',
-            domain: 'www.test.com',
-            email: 'test@gmail.com',
-            phoneNumber: '08056965067',
-            password: '5362'
-        }
+    const data = {
+        name: 'test hospital',
+        address: 'test addr',
+        domain: 'www.test.com',
+        email: 'test@gmail.com',
+        phoneNumber: '08056965067',
+        password: '5362'
+    }
+    beforeEach(async () => {
+        
         await db.sequelize.truncate({ cascade: true })
         result = await registerAHospital(data);
     })
@@ -34,15 +36,21 @@ describe('Register Hospital:', () => {
         assert.notProperty(result, 'password', 'password not included in returned value')
     })
 
+    it('should fetch an hospital by email', async () => {
+        const hospital = await getAHospitalByEmail(data.email);
+        assert.equal(data.name, hospital.name);
+    })
 
-   
-})
-
-describe('login Hospital:', () => {
-    let result;
-    beforeEach(async() => {
-     
-        await db.sequelize.truncate({ cascade: true })
-        result = await getAHospitalByEmail('')
-    })   
+    it('should update an hospital', async() => {
+        const updateInfo: hospitalUpdate = {
+            name: 'new hospital',
+            address: 'test addr',
+            domain: 'www.test.com',
+            email: 'test@gmail.com',
+            phoneNumber: '08056965067'
+        }
+        updateHospitalProfile(result.id, updateInfo)
+        const updatedHospitalInfo = await getAHospital(result.id);
+        assert.equal(updateInfo.name, updatedHospitalInfo.name);
+    })
 })

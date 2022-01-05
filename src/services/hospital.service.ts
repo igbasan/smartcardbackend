@@ -1,4 +1,5 @@
 import db from '../database/models';
+import { hospitalUpdate } from '../interface/auth.interface';
 
 
 export const getAHospital = async (hospitalId: number | undefined) => {
@@ -29,5 +30,18 @@ export const getAHospitalByEmail = async (email: string) => {
     } catch (error) {
         console.log(error);
         throw new Error('Unable to complete request')
+    }
+}
+
+export const updateHospitalProfile = async(hospitalId: number | undefined, data:hospitalUpdate) => {
+    try {
+        await db.hospital.update(data, {
+            where: {
+                id: hospitalId
+            }
+        })
+        return true;
+    } catch (error) {
+        throw new Error('Unable to update profile, contact admin!')
     }
 }

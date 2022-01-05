@@ -1,10 +1,10 @@
 import { Request, Response } from 'express';
-import { registerAHospital, updateHospitalProfile } from '../services/auth.service';
+import { registerAHospital } from '../services/auth.service';
 import { hospitalIn, hospitalLogIn, hospitalOut } from '../interface/auth.interface';
 import { checkValidity } from '../helper';
 import { generateToken, hashPassword, verifyPassword } from '../helpers/auth.helper';
 import { hospitalLogInRule, hospitalRegRule, hospitalUpdateRule } from '../interface/validators';
-import { getAHospitalByEmail, getAHospital } from '../services/hospital.service';
+import { getAHospitalByEmail, getAHospital, updateHospitalProfile } from '../services/hospital.service';
 import { userInfoInRequest } from '../types/express';
 
 export const registerHospital = async (req: Request, res: Response) => {
