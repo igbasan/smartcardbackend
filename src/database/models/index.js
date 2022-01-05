@@ -45,7 +45,4 @@ db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
 
-db.hospital.belongsToMany(db.patient, {through: "hospital_patient", as: "hospitals", foreignKey: 'id_hospital'});
-db.patient.belongsToMany(db.hospital, {through: "hospital_patient", as: "patients", foreignKey: 'id_patient'})
-
 module.exports = db;

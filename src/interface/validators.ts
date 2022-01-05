@@ -20,7 +20,6 @@ export const patientRegRule = {
     lastName: "string|required",
     otherName: "string",
     email: "required|email",
-    password: "string|max:8|min:5",
     phoneNumber: "string|required|min:11",
     genotype: "string",
     bloodGroup: "string",
@@ -29,12 +28,11 @@ export const patientRegRule = {
     state: "string",
     localGovernmentArea: "string",
     nin: "string",
-    dateOfBirth: "string"
+    dateOfBirth: "string|date"
 }
 
 export const patientLoginRule = {
     email: "required|email",
-    password: "string|max:8|min:5",
 }
 //hospital update rule
 export const hospitalUpdateRule = {

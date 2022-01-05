@@ -21,7 +21,6 @@ export interface patient {
     lastName: string,
     otherName: string,
     email: string,
-    password: string,
     phoneNumber: string,
     genotype: string,
     bloodGroup: string,
@@ -34,7 +33,6 @@ export interface patient {
 }
 
 export type patientIn = Omit<patient, "id">
-export type patientOut = Omit<patient, "password">
-export type patientLogIn = Pick<patient, "email" | "password">
+export type patientLogIn = Pick<patient, "email">
 
 
