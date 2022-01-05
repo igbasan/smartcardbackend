@@ -4,9 +4,9 @@ import { hospitalUpdate } from '../interface/auth.interface';
 
 export const getAHospital = async (hospitalId: number | undefined) => {
     try {
-        const details = await db.hospital.findOne({ 
-            where: { 
-                id: hospitalId 
+        const details = await db.hospital.findOne({
+            where: {
+                id: hospitalId
             },
             attributes: {
                 exclude: ['password']
@@ -21,19 +21,19 @@ export const getAHospital = async (hospitalId: number | undefined) => {
 
 export const getAHospitalByEmail = async (email: string) => {
     try {
-        const details = await db.hospital.findOne({ 
-            where: { 
-                email 
+        let details = await db.hospital.findOne({
+            where: {
+                email
             }
-        })
-        return details; // returns null if not found
+        });
+        return details// returns null if not found
     } catch (error) {
         console.log(error);
         throw new Error('Unable to complete request')
     }
 }
 
-export const updateHospitalProfile = async(hospitalId: number | undefined, data:hospitalUpdate) => {
+export const updateHospitalProfile = async (hospitalId: number | undefined, data: hospitalUpdate) => {
     try {
         await db.hospital.update(data, {
             where: {
