@@ -4,7 +4,7 @@ export const getAProfileByEmail = async (email: string) => {
     try {
         const details = await db.patient.findOne({ 
             where: { 
-                email 
+               email 
             }
         })
         return details

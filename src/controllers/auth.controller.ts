@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
 import { getAProfileByEmail } from '../services/patient.service';
 import { registerAHospital, registerAPatient } from '../services/auth.service';
-import { hospitalIn, hospitalLogIn, hospitalOut, hospitalUpdate, patientIn, patientLogIn } from '../interface/auth.interface';
+import { hospitalIn, hospitalLogIn, hospitalOut, hospitalUpdate, patientIn } from '../interface/auth.interface';
 import { checkValidity, generateToken, hashPassword, verifyPassword } from '../helpers/auth.helper';
-import { hospitalLogInRule, hospitalRegRule, hospitalUpdateRule, patientRegRule, patientLoginRule } from '../interface/validators';
+import { hospitalLogInRule, hospitalRegRule, hospitalUpdateRule, patientRegRule } from '../interface/validators';
 import { getAHospitalByEmail, getAHospital, updateHospitalProfile } from '../services/hospital.service';
 import { userInfoInRequest } from '../types/express';
 

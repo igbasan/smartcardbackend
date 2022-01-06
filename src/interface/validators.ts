@@ -31,9 +31,6 @@ export const patientRegRule = {
     dateOfBirth: "string|date"
 }
 
-export const patientLoginRule = {
-    email: "required|email",
-}
 //hospital update rule
 export const hospitalUpdateRule = {
     name: "string|required",

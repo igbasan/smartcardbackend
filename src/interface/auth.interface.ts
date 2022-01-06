@@ -33,6 +33,5 @@ export interface patient {
 }
 
 export type patientIn = Omit<patient, "id">
-export type patientLogIn = Pick<patient, "email">
 
 
