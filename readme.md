@@ -42,6 +42,8 @@ For test driven approach, lets ensure to seperate concerns
 - sqlite for development database
 - postgres for live database
 
+## RUNNING THE TEST
+ - change the environment variable to `test` then run `npm run test`
 ## Project strcuture
 The project structure is given below
 ```

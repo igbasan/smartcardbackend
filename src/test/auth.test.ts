@@ -39,11 +39,12 @@ describe('Hospital:', () => {
     it('should fetch an hospital by email', async () => {
         const hospital = await getAHospitalByEmail(data.email);
         assert.equal(data.name, hospital.name);
+        assert.notProperty(result, 'password', 'password not included in returned value')
     })
 
     it('should update an hospital', async() => {
         const updateInfo: hospitalUpdate = {
-            name: 'new hospital',
+            name: 'update hospital',
             address: 'test addr',
             domain: 'www.test.com',
             email: 'test@gmail.com',

@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
-import { registerAHospital } from '../services/auth.service';
-import { hospitalIn, hospitalLogIn, hospitalOut } from '../interface/auth.interface';
-import { checkValidity } from '../helper';
-import { generateToken, hashPassword, verifyPassword } from '../helpers/auth.helper';
-import { hospitalLogInRule, hospitalRegRule, hospitalUpdateRule } from '../interface/validators';
+import { getAProfileByEmail } from '../services/patient.service';
+import { registerAHospital, registerAPatient } from '../services/auth.service';
+import { hospitalIn, hospitalLogIn, hospitalOut, hospitalUpdate, patientIn } from '../interface/auth.interface';
+import { checkValidity, generateToken, hashPassword, verifyPassword } from '../helpers/auth.helper';
+import { hospitalLogInRule, hospitalRegRule, hospitalUpdateRule, patientRegRule } from '../interface/validators';
 import { getAHospitalByEmail, getAHospital, updateHospitalProfile } from '../services/hospital.service';
 import { userInfoInRequest } from '../types/express';
 
@@ -45,11 +45,13 @@ export const loginHospital = async (req: Request, res: Response) => {
         }
 
         // check that password is correct
-
         const pwdIsCorrect = await verifyPassword(data.password, foundHospital.password)
         if (!pwdIsCorrect) {
             return res.status(403).json({ success: false, message: 'email or password not valid' })
         }
+        // remove password from data to be sent
+        foundHospital = foundHospital.dataValues;
+        delete foundHospital.password;
 
         // generate token for user
         const userToken: string = await generateToken({ hospitalId: foundHospital.id, email: foundHospital.email })
@@ -71,7 +73,7 @@ export const getHospitalDetail = async (req: userInfoInRequest, res: Response) =
 }
 
 export const updateHospital = async (req: userInfoInRequest, res: Response) => {
-    let data: hospitalIn = req.body
+    let data: hospitalUpdate = req.body
 
     try {
         const error = checkValidity(data, hospitalUpdateRule);
@@ -89,3 +91,23 @@ export const updateHospital = async (req: userInfoInRequest, res: Response) => {
         return res.status(500).json({ success: false, message: 'Error occurred when fetching data!' })
     }
 }
+
+export const registerPatient = async (req: Request, res: Response) => {
+    let data: patientIn = req.body;
+
+    try {
+        const error = checkValidity(data, patientRegRule);
+        if(error) {
+            return res.status(400).json({
+                success: false, message: error
+            })
+        }
+
+        let result = await registerAPatient(req.body)
+        return res.status(201).json({ success: true, data: result });
+
+    } catch (error: any) {
+        return res.status(412).json({ success: false, message: error.message });
+    }
+};
+

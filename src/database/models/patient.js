@@ -3,7 +3,7 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class hospital extends Model {
+  class patient extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -11,18 +11,19 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      // A hospital can belong to many patient 
-      hospital.belongsToMany(models.patient, {through: "hospital_patient", as: "patients", foreignKey: 'id_hospital', otherKey: 'id_patient'});
     }
   };
-  hospital.init({
-    name: {
+  patient.init({
+    firstName: {
       type:DataTypes.STRING,
       allowNull: false
     },
-    address: DataTypes.TEXT,
-    domain: {
-      type: DataTypes.STRING,
+    lastName: {
+      type:DataTypes.STRING,
+      allowNull: false
+    },
+    otherName: {
+      type:DataTypes.STRING
     },
     email: {
       type: DataTypes.STRING,
@@ -35,7 +36,22 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false
     },
-    hospital_reg: {
+    genotype: {
+      type: DataTypes.STRING,
+    },
+    bloodGroup: {
+      type: DataTypes.STRING,
+    },
+    passport: {
+      type: DataTypes.STRING,
+    },
+    nationality: {
+      type: DataTypes.STRING,
+    },
+    localGovernmentArea: {
+      type: DataTypes.STRING,
+    },
+    dataOfBirth: {
       type: DataTypes.STRING,
     },
     password: {
@@ -43,7 +59,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {
     sequelize,
-    modelName: 'hospital',
+    modelName: 'patient',
   });
-  return hospital;
+  return patient;
 };
