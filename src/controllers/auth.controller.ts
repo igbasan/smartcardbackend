@@ -1,8 +1,9 @@
 import { Request, Response } from 'express';
-import { registerAHospital } from '../services/auth.service';
-import { hospitalIn, hospitalLogIn, hospitalOut, hospitalUpdate } from '../interface/auth.interface';
+import { getAProfileByEmail } from '../services/patient.service';
+import { registerAHospital, registerAPatient } from '../services/auth.service';
+import { hospitalIn, hospitalLogIn, hospitalOut, hospitalUpdate, patientIn } from '../interface/auth.interface';
 import { checkValidity, generateToken, hashPassword, verifyPassword } from '../helpers/auth.helper';
-import { hospitalLogInRule, hospitalRegRule, hospitalUpdateRule } from '../interface/validators';
+import { hospitalLogInRule, hospitalRegRule, hospitalUpdateRule, patientRegRule } from '../interface/validators';
 import { getAHospitalByEmail, getAHospital, updateHospitalProfile } from '../services/hospital.service';
 import { userInfoInRequest } from '../types/express';
 
@@ -90,3 +91,23 @@ export const updateHospital = async (req: userInfoInRequest, res: Response) => {
         return res.status(500).json({ success: false, message: 'Error occurred when fetching data!' })
     }
 }
+
+export const registerPatient = async (req: Request, res: Response) => {
+    let data: patientIn = req.body;
+
+    try {
+        const error = checkValidity(data, patientRegRule);
+        if(error) {
+            return res.status(400).json({
+                success: false, message: error
+            })
+        }
+
+        let result = await registerAPatient(req.body)
+        return res.status(201).json({ success: true, data: result });
+
+    } catch (error: any) {
+        return res.status(412).json({ success: false, message: error.message });
+    }
+};
+
