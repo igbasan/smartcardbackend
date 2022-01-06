@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "NODE_ENV=test npm run update-db && mocha --require ts-node/register src/**/*.test.ts",
-    "start": "node dist/index.js",
+    "start": "npm run update-db && node dist/index.js",
     "dev": "nodemon src/index.ts",
     "update-db": "sequelize db:migrate",
     "build": "tsc -p ."
