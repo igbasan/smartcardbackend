@@ -1,6 +1,6 @@
 'use strict';
 
-require('dotenv').config();
+require('dotenv').config('../config/config');
 const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
@@ -45,7 +45,10 @@ db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
 
+<<<<<<< HEAD
 db.hospital.belongsToMany(db.patient, {through: "hospital_patient", as: "hospitals", foreignKey: 'id_hospital'});
 db.patient.belongsToMany(db.hospital, {through: "hospital_patient", as: "patients", foreignKey: 'id_patient'})
 
+=======
+>>>>>>> e43603494d3ec183db769bd5c795c99f31f45e71
 module.exports = db;
