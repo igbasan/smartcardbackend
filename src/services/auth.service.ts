@@ -51,8 +51,4 @@ export const registerAPatient = async(data: patientIn) => {
     } catch (error) {
         throw new Error("there is an error registering patient")
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> e43603494d3ec183db769bd5c795c99f31f45e71

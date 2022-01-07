@@ -28,12 +28,6 @@ export const verifyPassword = async (pwd: string, dbpwd: string) => {
   return false;
 }
 
-<<<<<<< HEAD
-export const hashPassword = async(pwd:string) => {
-    const hashed = await bcrypt.hash(pwd, 10);
-  //  console.log(hashed)
-    return hashed;
-=======
 export const checkValidity = (data, rule) => {
   // ensure all required fields are sent without unwanted fields
   try {
@@ -56,7 +50,6 @@ export const checkValidity = (data, rule) => {
     // return empty array if no error
     return ''
   }
->>>>>>> e43603494d3ec183db769bd5c795c99f31f45e71
 }
 
 export const verifyToken = (req: userInfoInRequest, res: Response, next: NextFunction) => {
