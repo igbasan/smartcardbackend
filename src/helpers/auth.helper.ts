@@ -52,7 +52,7 @@ export const checkValidity = (data, rule) => {
   }
 }
 
-export const verifyToken = (req: userInfoInRequest, res: Response, next: NextFunction) => {
+export const verifyHospitalToken = (req: userInfoInRequest, res: Response, next: NextFunction) => {
   // if no bearer token is set
   if (!req.headers.authorization) {
     return res.status(401).json({ success: false, "message": "Unauthorized request" })

@@ -29,9 +29,9 @@ export const registerAHospital = async (data: hospitalIn) => {
     }
 }
 
-export const registerAPatient = async(data: patientIn) => {
+export const registerAPatient = async (hospitalId: number | undefined, data: patientIn) => {
     //check if email or phone number exist
-    const patientExist =  await db.patient.findOne({
+    const patientExist = await db.patient.findOne({
         where: {
             [Op.or]: [
                 { email: data.email },
@@ -40,13 +40,26 @@ export const registerAPatient = async(data: patientIn) => {
         }
     })
 
-
-    if(patientExist) {
+    if (patientExist) {
         throw new Error("A patient already have this email and phone number")
     }
     try {
-        const newPatient = await db.patient.create(data);
-        let results = newPatient.get({ plain: true });
+        const results = await db.sequelize.transaction(async (t) => {
+            // store the patient record
+            const newPatient = await db.patient.create(data, { transaction: t });
+
+            // map the patient to the hospital
+            try {
+                await db.hospital_patient.create({ id_hospital: hospitalId, id_patient: newPatient.id }, { transaction: t })
+            } catch (error) {
+                throw new Error('Unable to map hospital to patient')
+            }
+            
+
+            return newPatient.get({ plain: true });;
+
+        });
+
         return results
     } catch (error) {
         throw new Error("there is an error registering patient")

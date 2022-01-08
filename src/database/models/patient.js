@@ -58,8 +58,8 @@ module.exports = (sequelize, DataTypes) => {
     localGovernmentArea: {
       type: DataTypes.STRING,
     },
-    dataOfBirth: {
-      type: DataTypes.STRING,
+    dateOfBirth: {
+      type: DataTypes.DATE,
     },
     password: {
       type: DataTypes.STRING,
