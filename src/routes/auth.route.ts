@@ -1,5 +1,5 @@
 import express from 'express';
-import { getHospitalDetail, loginHospital, registerHospital, updateHospital, registerPatient } from '../controllers/auth.controller';
+import { getHospitalDetail, loginHospital, registerHospital, updateHospital, registerPatient, getPatientProfile, updatePatientProfile } from '../controllers/auth.controller';
 import { verifyToken } from '../helpers/auth.helper';
 
 const authRouter = express.Router();
@@ -7,7 +7,9 @@ const authRouter = express.Router();
 
 authRouter.post('/register', registerHospital)
 authRouter.post('/login', loginHospital)
-authRouter.post('/patient/register', registerPatient)
+authRouter.post('/patient/register', registerPatient);
+authRouter.put('/patient', verifyToken, updatePatientProfile);
+authRouter.get('/patient', verifyToken, getPatientProfile)
 authRouter.get('/:regNo', verifyToken,getHospitalDetail)
 
 authRouter.get('/', verifyToken,getHospitalDetail)

@@ -5,6 +5,7 @@ import { hospitalIn, hospitalLogIn, hospitalOut, hospitalUpdate, patientIn } fro
 import { checkValidity, generateToken, hashPassword, verifyPassword } from '../helpers/auth.helper';
 import { hospitalLogInRule, hospitalRegRule, hospitalUpdateRule, patientRegRule } from '../interface/validators';
 import { getAHospitalByEmail, getAHospital, updateHospitalProfile } from '../services/hospital.service';
+import { getAPatient, updatePatient } from '../services/patient.service'
 import { userInfoInRequest } from '../types/express';
 
 export const registerHospital = async (req: Request, res: Response) => {
@@ -110,4 +111,21 @@ export const registerPatient = async (req: Request, res: Response) => {
         return res.status(412).json({ success: false, message: error.message });
     }
 };
+
+export const getPatientProfile = async (req: userInfoInRequest, res: Response) => {
+    try {
+        let result = await getAPatient(req.hospitalId)
+        console.log(result)
+       // result === null ? result = {} : result;
+       // return res.status(200).json({ success: true, data: result })
+    } catch (error: any) {
+        return res.status(412).json({ success: false, message: error.message  })
+    }
+}
+
+
+export const updatePatientProfile = async (req: userInfoInRequest, res: Response) => {
+
+}
+
 
