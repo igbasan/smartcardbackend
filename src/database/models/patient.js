@@ -11,10 +11,6 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-<<<<<<< HEAD
-=======
-
->>>>>>> 4f1817b67ac2af46b14e2e4176cf9ab7222d9f0c
       patient.belongsToMany(models.hospital, { 
         through: "hospital_patients", 
         as: "hospitals", 
