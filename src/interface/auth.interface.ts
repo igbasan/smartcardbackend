@@ -19,19 +19,21 @@ export interface patient {
     id: number,
     firstName: string,
     lastName: string,
-    otherName: string,
+    otherName?: string,
     email: string,
     phoneNumber: string,
-    genotype: string,
-    bloodGroup: string,
-    passport: string,
-    nationality: string,
-    state: string,
-    localGovernmentArea: string,
-    nin: string,
-    dateOfBirth: string
+    genotype?: string,
+    bloodGroup?: string,
+    passport?: string,
+    nationality?: string,
+    state?: string,
+    localGovernmentArea?: string,
+    nin?: string,
+    dateOfBirth: string,
+    patientId: string
 }
 
 export type patientIn = Omit<patient, "id">
+export type patientUpdate = Omit<PageTransitionEvent, "id" | "patientId">
 
 

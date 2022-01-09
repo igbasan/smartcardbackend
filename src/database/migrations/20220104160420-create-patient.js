@@ -38,8 +38,8 @@ module.exports = {
       localGovernmentArea: {
         type: Sequelize.STRING
       },
-      dataOfBirth: {
-        type: Sequelize.STRING
+      dateOfBirth: {
+        type: Sequelize.DATE
       },
       createdAt: {
         allowNull: false,
