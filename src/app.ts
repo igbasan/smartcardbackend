@@ -9,6 +9,10 @@ app.use(express.urlencoded({ extended: true }));
 // other app config stays here
 app.use('/hospital',authRouter);
 
+app.get('/', (req, res)=>{
+    res.status(200).send('Server up and runing')
+})
+
 
 
 export default app;
