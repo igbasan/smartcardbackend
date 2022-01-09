@@ -64,7 +64,8 @@ describe('Hospital-patient:', () => {
         domain: 'www.test.com',
         email: 'test@gmail.com',
         phoneNumber: '08056965067',
-        password: '5362'
+        password: '5362',
+        hospital_reg: "01"
     }
 
     const sample_patient = {
@@ -72,7 +73,8 @@ describe('Hospital-patient:', () => {
         lastName: "shakespare",
         email: "shakes@gmail.com",
         phoneNumber: "08056965037",
-        dateOfBirth: "05/22/2021"
+        dateOfBirth: "05/22/2021",
+        patientId: "01-00001"
     }
     before(async()=> {
         await db.sequelize.truncate({ cascade: true })
