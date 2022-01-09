@@ -15,7 +15,7 @@ authRouter.get('/', verifyHospitalToken,getHospitalDetail)
 authRouter.put('/', verifyHospitalToken, updateHospital)
 
 authRouter.post('/patient/register', verifyHospitalToken, registerPatient);
-authRouter.put('/patient', verifyHospitalToken, updatePatientProfile);
+authRouter.put('/patient/:patientId', verifyHospitalToken, updatePatientProfile);
 authRouter.get('/patient/:patientId', verifyHospitalToken, getPatientProfile)
 
 

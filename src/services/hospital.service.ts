@@ -1,5 +1,5 @@
 import db from '../database/models';
-import { hospitalUpdate, patientIn } from '../interface/auth.interface';
+import { hospitalUpdate, patientIn, patientUpdate } from '../interface/auth.interface';
 
 
 export const getAHospital = async (hospitalId: number | undefined) => {
@@ -73,11 +73,17 @@ export const getAProfileByEmail = async (email: string) => {
     }
 }
 
-export const updatePatient = async (patientId: number | undefined, data: patientIn) => {
+export const updatePatient = async (patientId: string | undefined, data: patientUpdate) => {
     try {
+        const patient = db.patient.findOne({
+            where:{
+                patientId
+            }
+        })
+        if (!patient) { throw new Error('No patient with such id!')};
         await db.patient.update(data, {
             where: {
-                id: patientId
+                patientId
             }
         });
         return true

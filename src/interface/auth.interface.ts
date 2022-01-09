@@ -34,5 +34,6 @@ export interface patient {
 }
 
 export type patientIn = Omit<patient, "id">
+export type patientUpdate = Omit<PageTransitionEvent, "id" | "patientId">
 
 
