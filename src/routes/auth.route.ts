@@ -1,18 +1,22 @@
 import express from 'express';
-import { getHospitalDetail, loginHospital, registerHospital, updateHospital, registerPatient } from '../controllers/auth.controller';
-import { verifyToken } from '../helpers/auth.helper';
+import { getHospitalDetail, loginHospital, registerHospital, updateHospital} from '../controllers/auth.controller';
+import { registerPatient, updatePatientProfile, getPatientProfile } from '../controllers/hospital.controller';
+import { verifyHospitalToken } from '../helpers/auth.helper';
 
 const authRouter = express.Router();
 
 
 authRouter.post('/register', registerHospital)
 authRouter.post('/login', loginHospital)
-authRouter.post('/patient/register', registerPatient)
 
-authRouter.get('/:regNo', verifyToken,getHospitalDetail)
-authRouter.get('/', verifyToken,getHospitalDetail)
 
-authRouter.put('/', verifyToken, updateHospital)
+authRouter.get('/', verifyHospitalToken,getHospitalDetail)
+
+authRouter.put('/', verifyHospitalToken, updateHospital)
+
+authRouter.post('/patient/register', verifyHospitalToken, registerPatient);
+authRouter.put('/patient/:patientId', verifyHospitalToken, updatePatientProfile);
+authRouter.get('/patient/:patientId', verifyHospitalToken, getPatientProfile)
 
 
 export default authRouter;

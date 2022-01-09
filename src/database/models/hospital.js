@@ -42,6 +42,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     hospital_reg: {
       type: DataTypes.STRING,
+      allowNull: false
     },
     password: {
       type: DataTypes.STRING,

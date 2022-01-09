@@ -15,7 +15,6 @@ export const generateToken = async (payload: any) => {
 
 export const hashPassword = async (pwd: string) => {
   const hashed = await bcrypt.hash(pwd, 10);
-  console.log(hashed)
   return hashed;
 }
 
@@ -52,7 +51,7 @@ export const checkValidity = (data, rule) => {
   }
 }
 
-export const verifyToken = (req: userInfoInRequest, res: Response, next: NextFunction) => {
+export const verifyHospitalToken = (req: userInfoInRequest, res: Response, next: NextFunction) => {
   // if no bearer token is set
   if (!req.headers.authorization) {
     return res.status(401).json({ success: false, "message": "Unauthorized request" })
@@ -77,10 +76,11 @@ export const verifyToken = (req: userInfoInRequest, res: Response, next: NextFun
 }
 
 export const validateFields = (requiredFields: string[], incomingData: string[]) => {
-  // this function ensures that only required fields are recieved from incoming data
+  // this function ensures that only unexpected fields are not inserted in incoming data
   for(let field of incomingData) {
     if (!requiredFields.includes(field)   ) {
       throw new Error(`unexpected field ${field} in request`);
     }
   }
+
 }

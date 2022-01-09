@@ -1,5 +1,4 @@
 import { Request, Response } from 'express';
-import { getAProfileByEmail } from '../services/patient.service';
 import { registerAHospital, registerAPatient } from '../services/auth.service';
 import { hospitalIn, hospitalLogIn, hospitalOut, hospitalUpdate, patientIn } from '../interface/auth.interface';
 import { checkValidity, generateToken, hashPassword, verifyPassword } from '../helpers/auth.helper';
@@ -92,22 +91,6 @@ export const updateHospital = async (req: userInfoInRequest, res: Response) => {
     }
 }
 
-export const registerPatient = async (req: Request, res: Response) => {
-    let data: patientIn = req.body;
 
-    try {
-        const error = checkValidity(data, patientRegRule);
-        if(error) {
-            return res.status(400).json({
-                success: false, message: error
-            })
-        }
 
-        let result = await registerAPatient(req.body)
-        return res.status(201).json({ success: true, data: result });
-
-    } catch (error: any) {
-        return res.status(412).json({ success: false, message: error.message });
-    }
-};
 
