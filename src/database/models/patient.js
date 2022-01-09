@@ -69,6 +69,10 @@ module.exports = (sequelize, DataTypes) => {
     },
     nin: {
       type: DataTypes.STRING
+    },
+    patientId: {
+      type: DataTypes.STRING,
+      allowNull: false
     }
   }, {
     sequelize,

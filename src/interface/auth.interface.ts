@@ -29,7 +29,8 @@ export interface patient {
     state?: string,
     localGovernmentArea?: string,
     nin?: string,
-    dateOfBirth: string
+    dateOfBirth: string,
+    patientId: string
 }
 
 export type patientIn = Omit<patient, "id">

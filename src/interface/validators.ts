@@ -28,7 +28,8 @@ export const patientRegRule = {
     state: "string",
     localGovernmentArea: "string",
     nin: "string",
-    dateOfBirth: "string|date"
+    dateOfBirth: "string|date",
+    patientId: "string|required"
 }
 
 //hospital update rule

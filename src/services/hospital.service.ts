@@ -46,24 +46,15 @@ export const updateHospitalProfile = async (hospitalId: number | undefined, data
     }
 }
 
-export const getAPatient = async (hospitalId: number | undefined) => {
+export const getAPatient = async (patientId: string) => {
+    // patient id is not the database generated id during registration
     try {
-        const details = await db.hospital.findAll({
+        const details = await db.patient.findOne({
             where: {
-                id: hospitalId
-            },
-            attributes: {
-                exclude: ['password']
-            },
-            include: [
-                {
-                  model: db.patient,
-                  as: "patients",
-                },
-              ],
+                patientId
+            }
         })
-        details.forEach(detail => console.log(detail.toJSON()))
-        return details;
+        return details
     } catch (error) {
         throw new Error('Unable to fetch patient') 
     }

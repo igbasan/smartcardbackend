@@ -29,10 +29,9 @@ export const registerPatient = async (req: userInfoInRequest, res: Response) => 
 
 export const getPatientProfile = async (req: userInfoInRequest, res: Response) => {
     try {
-        let result = await getAPatient(req.hospitalId)
-        console.log(result)
-       // result === null ? result = {} : result;
-       // return res.status(200).json({ success: true, data: result })
+        let result = await getAPatient(req.params.patientId);
+       result === null ? result = {} : result;
+       return res.status(200).json({ success: true, data: result })
     } catch (error: any) {
         return res.status(412).json({ success: false, message: error.message  })
     }
