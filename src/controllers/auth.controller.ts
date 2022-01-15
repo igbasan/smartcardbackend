@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { registerAHospital, registerAPatient } from '../services/auth.service';
 import { hospitalIn, hospitalLogIn, hospitalOut, hospitalUpdate, patientIn } from '../interface/auth.interface';
 import { checkValidity, generateToken, hashPassword, verifyPassword } from '../helpers/auth.helper';
-import { hospitalLogInRule, hospitalRegRule, hospitalUpdateRule, patientRegRule } from '../interface/validators';
+import { hospitalLogInRule, hospitalRegRule, hospitalUpdateRule, patientRegRule } from '../validators/validators';
 import { getAHospitalByEmail, getAHospital, updateHospitalProfile } from '../services/hospital.service';
 import { userInfoInRequest } from '../types/express';
 
@@ -92,5 +92,6 @@ export const updateHospital = async (req: userInfoInRequest, res: Response) => {
 }
 
 
-
-
+export const resetPassword = async(req: Request, res: Response) => {
+    
+}

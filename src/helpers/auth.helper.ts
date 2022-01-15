@@ -9,7 +9,6 @@ import { userInfoInRequest } from '../types/express';
 
 export const generateToken = async (payload: any) => {
   const token = jwt.sign(payload, process.env.SECRET_KEY, { expiresIn: '10h' });
-  console.log(process.env.SECRET_KEY)
   return token;
 }
 

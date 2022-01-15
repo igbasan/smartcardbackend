@@ -1,6 +1,7 @@
 import express, {Application, Request, Response} from 'express';
 import authRouter from './routes/auth.route';
 import Cors from 'cors';
+import patientRoute from './routes/hospital.route';
 
 const app: Application = express();
 
@@ -17,6 +18,7 @@ app.use(function (req, res, next) {
 
 // other app config stays here
 app.use('/hospital',authRouter);
+app.use('/patient',patientRoute);
 
 app.use(Cors())
 app.use(function (req, res, next) {

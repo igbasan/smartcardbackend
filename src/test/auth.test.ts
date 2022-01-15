@@ -100,7 +100,7 @@ describe('Hospital-patient:', () => {
         assert.equal(hospital_patient.id_patient, newPatient.id)
     })
     it('should get a patient by the patient id', async() => {
-        const fetched_patient = await getAPatient(sample_patient.patientId);
+        const fetched_patient = await getAPatient(sample_patient.patientId, hospital.id);
         assert.equal(fetched_patient.patientId, sample_patient.patientId)
         assert.equal(fetched_patient.firstName, sample_patient.firstName)
     })
