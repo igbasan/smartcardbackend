@@ -8,10 +8,11 @@ module.exports = {
         dialect: 'postgres'
     },
     test: {
-        // no config for now
+        dialect: "sqlite",
+        storage: ":memory"
     },
     development: {
         dialect: "sqlite",
-        storage: "./smartcard.sqlite"
+        storage: "smartcard.sqlite"
     },
 }
