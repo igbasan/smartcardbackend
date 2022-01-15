@@ -10,7 +10,7 @@ export interface hospital {
 }
 
 
-export type hospitalIn = Omit<hospital, "id" | "hospital_reg">
+export type hospitalIn = Omit<hospital, "id">
 export type hospitalOut = Omit<hospital, "password">
 export type hospitalLogIn = Pick<hospital, "email" | "password">
 export type hospitalUpdate = Omit<hospital, "password" | "hospital_reg" | "id">
@@ -19,19 +19,21 @@ export interface patient {
     id: number,
     firstName: string,
     lastName: string,
-    otherName: string,
+    otherName?: string,
     email: string,
     phoneNumber: string,
-    genotype: string,
-    bloodGroup: string,
-    passport: string,
-    nationality: string,
-    state: string,
-    localGovernmentArea: string,
-    nin: string,
-    dateOfBirth: string
+    genotype?: string,
+    bloodGroup?: string,
+    passport?: string,
+    nationality?: string,
+    state?: string,
+    localGovernmentArea?: string,
+    nin?: string,
+    dateOfBirth: string,
+    patientId: string
 }
 
 export type patientIn = Omit<patient, "id">
+export type patientUpdate = Omit<PageTransitionEvent, "id" | "patientId">
 
 

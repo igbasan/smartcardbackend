@@ -12,12 +12,17 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       // A hospital can belong to many patient 
-      hospital.belongsToMany(models.patient, {through: "hospital_patient", as: "patients", foreignKey: 'id_hospital', otherKey: 'id_patient'});
+      hospital.belongsToMany(models.patient, { 
+        through: "hospital_patients", 
+        as: "patients", 
+        foreignKey: 'id_hospital', 
+        otherKey: 'id_patient' 
+      });
     }
   };
   hospital.init({
     name: {
-      type:DataTypes.STRING,
+      type: DataTypes.STRING,
       allowNull: false
     },
     address: DataTypes.TEXT,
@@ -37,6 +42,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     hospital_reg: {
       type: DataTypes.STRING,
+      allowNull: false
     },
     password: {
       type: DataTypes.STRING,
