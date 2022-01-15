@@ -21,7 +21,7 @@ export const registerAHospital = async (data: hospitalIn) => {
 }
 
 export const registerAPatient = async (hospitalId: number | undefined, data: patientIn) => {
-    
+    // hosptialId is the database generated id for hospital upon registration
     try {
         const results = await db.sequelize.transaction(async (t) => {
             // store the patient record
@@ -38,7 +38,6 @@ export const registerAPatient = async (hospitalId: number | undefined, data: pat
             return newPatient.get({ plain: true });;
 
         });
-
         return results
     } catch (error: any) {
         if (error.name === 'SequelizeUniqueConstraintError') {
